@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniyal Piano</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid #ffce00;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #ffce00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        /* Main content: Piano */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .piano-container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .piano {
+            display: flex;
+            position: relative;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        /* White keys */
+        .key {
+            flex: 1;
+            height: 200px;
+            background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+            border: 2px solid #ccc;
+            border-radius: 0 0 8px 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #333;
+            user-select: none;
+            position: relative;
+            z-index: 1;
+            transition: all 0.1s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .key:hover {
+            background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .key:active {
+            background: linear-gradient(to bottom, #ddd, #bbb);
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Black keys */
+        .key.black {
+            width: 30px;
+            height: 130px;
+            background: linear-gradient(to bottom, #000, #333);
+            color: #fff;
+            position: absolute;
+            margin: 0;
+            z-index: 2;
+            top: 0;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            transition: all 0.1s ease;
+        }
+
+        .key.black:hover {
+            background: linear-gradient(to bottom, #333, #555);
+            transform: translateY(-1px);
+        }
+
+        .key.black:active {
+            background: linear-gradient(to bottom, #555, #777);
+            transform: translateY(0);
+        }
+
+        /* Positioning black keys (adjusted for two octaves) */
+        .key.black[data-note="C#4"] { left: 6.25%; }
+        .key.black[data-note="D#4"] { left: 18.75%; }
+        .key.black[data-note="F#4"] { left: 43.75%; }
+        .key.black[data-note="G#4"] { left: 56.25%; }
+        .key.black[data-note="A#4"] { left: 68.75%; }
+        .key.black[data-note="C#5"] { left: 81.25%; }
+        .key.black[data-note="D#5"] { left: 93.75%; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+            border-top: 2px solid #ffce00;
+            font-size: 1rem;
+        }
+
+        footer span {
+            color: #ffce00;
+            font-weight: bold;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .key {
+                height: 150px;
+                font-size: 12px;
+            }
+            .key.black {
+                width: 25px;
+                height: 100px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .key {
+                height: 120px;
+                font-size: 10px;
+            }
+            .key.black {
+                width: 20px;
+                height: 80px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Daniyal Piano</h1>
+        <p>Interactive Piano Using HTML, CSS, and JavaScript</p>
+    </header>
+
+    <main>
+        <div class="piano-container">
+            <div class="piano">
+                <!-- White keys (two octaves) -->
+                <div class="key" data-note="C4">C4</div>
+                <div class="key" data-note="D4">D4</div>
+                <div class="key" data-note="E4">E4</div>
+                <div class="key" data-note="F4">F4</div>
+                <div class="key" data-note="G4">G4</div>
+                <div class="key" data-note="A4">A4</div>
+                <div class="key" data-note="B4">B4</div>
+                <div class="key" data-note="C5">C5</div>
+
+                <!-- Black keys -->
+                <div class="key black" data-note="C#4">C#4</div>
+                <div class="key black" data-note="D#4">D#4</div>
+                <div class="key black" data-note="F#4">F#4</div>
+                <div class="key black" data-note="G#4">G#4</div>
+                <div class="key black" data-note="A#4">A#4</div>
+                <div class="key black" data-note="C#5">C#5</div>
+                <div class="key black" data-note="D#5">D#5</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Daniyal Ajmal Email: <span>daniyalajmal001@gmail.com</span>
+    </footer>
+
+    <script>
+        const notes = {
+            "C4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/C4.mp3",
+            "C#4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/Cs4.mp3",
+            "D4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/D4.mp3",
+            "D#4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/Ds4.mp3",
+            "E4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/E4.mp3",
+            "F4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/F4.mp3",
+            "F#4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/Fs4.mp3",
+            "G4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/G4.mp3",
+            "G#4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/Gs4.mp3",
+            "A4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/A4.mp3",
+            "A#4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/As4.mp3",
+            "B4": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/B4.mp3",
+            "C5": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/C5.mp3",
+            "C#5": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/Cs5.mp3",
+            "D#5": "https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/FluidR3_GM/acoustic_grand_piano-mp3/Ds5.mp3"
+        };
+
+        function playNote(note) {
+            const audio = new Audio(notes[note]);
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        document.querySelectorAll('.key').forEach(key => {
+            key.addEventListener('click', () => playNote(key.dataset.note));
+        });
+
+        const keyboardMap = {
+            'a': 'C4',
+            'w': 'C#4',
+            's': 'D4',
+            'e': 'D#4',
+            'd': 'E4',
+            'f': 'F4',
+            't': 'F#4',
+            'g': 'G4',
+            'y': 'G#4',
+            'h': 'A4',
+            'u': 'A#4',
+            'j': 'B4',
+            'k': 'C5',
+            'o': 'C#5',
+            'l': 'D#5'
+        };
+
+        document.addEventListener('keydown', e => {
+            const note = keyboardMap[e.key];
+            if (note) playNote(note);
+        });
+    </script>
+</body>
+</html>
